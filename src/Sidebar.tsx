@@ -1,8 +1,18 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Box, Button, Collapsible, Layer } from "grommet";
 import { FormClose } from "grommet-icons";
 
-export const Sidebar = ({ showSidebar, size, setShowSidebar }) => {
+interface SideBarProps {
+  showSidebar: boolean;
+  size: string;
+  setShowSidebar: Function;
+}
+
+export const Sidebar = ({
+  showSidebar,
+  size,
+  setShowSidebar,
+}: SideBarProps): ReactElement => {
   return (
     <>
       {!showSidebar || size !== "small" ? (
