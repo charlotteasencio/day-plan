@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Box, Grommet, ResponsiveContext } from "grommet";
+import { NavBar } from "./NavBar";
+import { Sidebar } from "./Sidebar";
 
-function App() {
+const App = () => {
+  const [showSidebar, setShowSidebar] = useState(false);
+
+  const handleSetShowSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
+  const theme = {
+    global: {
+      font: {
+        family: "Roboto",
+        size: "18px",
+        height: "20px",
+      },
+    },
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Grommet theme={theme} full>
+      <ResponsiveContext.Consumer>
+        {(size) => (
+          <Box fill>
+            <NavBar
+              showSidebar={showSidebar}
+              setShowSidebar={handleSetShowSidebar}
+            />
+            <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
+              <Sidebar
+                setShowSidebar={handleSetShowSidebar}
+                showSidebar={showSidebar}
+                size={size}
+              />
+              <Box flex align="center" justify="center">
+                app body
+              </Box>
+            </Box>
+          </Box>
+        )}
+      </ResponsiveContext.Consumer>
+    </Grommet>
   );
-}
+};
 
 export default App;
