@@ -1,9 +1,9 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Box, Button, Heading } from "grommet";
 import { Menu as MenuIcon } from "grommet-icons";
 import { WidgetMenu } from "./WidgetMenu";
 
-const AppBar = (props) => (
+const AppBar = (props: any) => (
   <Box
     tag="header"
     direction="row"
@@ -17,7 +17,15 @@ const AppBar = (props) => (
   />
 );
 
-export const NavBar = ({ showSidebar, setShowSidebar }) => (
+interface NavBarProps {
+  showSidebar: boolean;
+  setShowSidebar: Function;
+}
+
+export const NavBar = ({
+  showSidebar,
+  setShowSidebar,
+}: NavBarProps): ReactElement => (
   <AppBar>
     <Button
       icon={<MenuIcon />}
