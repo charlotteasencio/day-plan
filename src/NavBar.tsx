@@ -1,9 +1,9 @@
 import React, { ReactElement } from "react";
 import { Box, Button, Heading } from "grommet";
 import { Menu as MenuIcon } from "grommet-icons";
-import { WidgetMenu } from "./WidgetMenu";
+import { NavBarProps } from "./types";
 
-const AppBar = (props: any) => (
+const AppBar = (props: any): ReactElement => (
   <Box
     tag="header"
     direction="row"
@@ -16,11 +16,6 @@ const AppBar = (props: any) => (
     {...props}
   />
 );
-
-interface NavBarProps {
-  showSidebar: boolean;
-  setShowSidebar: Function;
-}
 
 export const NavBar = ({
   showSidebar,
@@ -36,6 +31,5 @@ export const NavBar = ({
     <Heading level="3" margin="none" alignSelf="center">
       Day Plan
     </Heading>
-    <WidgetMenu />
   </AppBar>
 );
