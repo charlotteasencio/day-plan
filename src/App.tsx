@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import { Box, Grommet, ResponsiveContext } from "grommet";
 import { NavBar } from "./NavBar";
-import { Sidebar } from "./Sidebar";
+import { MainAppPage } from "./MainAppPage";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
-const App = () => {
+const App = (): ReactElement => {
   const [showSidebar, setShowSidebar] = useState(false);
 
   const handleSetShowSidebar = () => {
@@ -20,28 +22,25 @@ const App = () => {
   };
 
   return (
-    <Grommet theme={theme} full>
-      <ResponsiveContext.Consumer>
-        {(size) => (
-          <Box fill>
-            <NavBar
-              showSidebar={showSidebar}
-              setShowSidebar={handleSetShowSidebar}
-            />
-            <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-              <Sidebar
+    <DndProvider backend={HTML5Backend}>
+      <Grommet theme={theme} full>
+        <ResponsiveContext.Consumer>
+          {(size) => (
+            <Box fill>
+              <NavBar
+                showSidebar={showSidebar}
+                setShowSidebar={handleSetShowSidebar}
+              />
+              <MainAppPage
+                size={size}
                 setShowSidebar={handleSetShowSidebar}
                 showSidebar={showSidebar}
-                size={size}
               />
-              <Box flex align="center" justify="center">
-                app body
-              </Box>
             </Box>
-          </Box>
-        )}
-      </ResponsiveContext.Consumer>
-    </Grommet>
+          )}
+        </ResponsiveContext.Consumer>
+      </Grommet>
+    </DndProvider>
   );
 };
 

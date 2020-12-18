@@ -1,8 +1,8 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Box, Menu } from "grommet";
 import { Actions, Edit, Task } from "grommet-icons";
 
-export const WidgetMenu = () => (
+export const WidgetMenu = (): ReactElement => (
   <Menu
     a11yTitle="add a widget"
     label="Add Widget"

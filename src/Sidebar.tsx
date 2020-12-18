@@ -1,17 +1,39 @@
 import React, { ReactElement } from "react";
-import { Box, Button, Collapsible, Layer } from "grommet";
-import { FormClose } from "grommet-icons";
+import { Box, Button, Collapsible, Layer, Text } from "grommet";
+import { FormClose, Drag as DragIcon } from "grommet-icons";
+import { SideBarProps } from "./types";
 
-interface SideBarProps {
-  showSidebar: boolean;
-  size: string;
-  setShowSidebar: Function;
+interface SidebarCardProps {
+  label: string;
+  icon: ReactElement;
 }
 
-export const Sidebar = ({
+const boxStyle = {
+  borderBottom: "1px solid lightgrey",
+};
+
+const SidebarCard = ({ label, icon }: SidebarCardProps): ReactElement => {
+  return (
+    <Box
+      style={boxStyle}
+      pad="small"
+      width="100%"
+      direction="row"
+      justify="between"
+      align="center"
+    >
+      {icon}
+      <Text>{label}</Text>
+      <DragIcon size="small" />
+    </Box>
+  );
+};
+
+export const AppSidebar = ({
   showSidebar,
   size,
   setShowSidebar,
+  widgets,
 }: SideBarProps): ReactElement => {
   return (
     <>
@@ -22,10 +44,15 @@ export const Sidebar = ({
             background="light-2"
             elevation="small"
             align="center"
-            justify="center"
+            justify="start"
             flex
           >
-            sidebar
+            {
+              //@ts-ignore
+              widgets.map((widget) => {
+                return <SidebarCard icon={widget.icon} label={widget.label} />;
+              })
+            }
           </Box>
         </Collapsible>
       ) : (
@@ -42,9 +69,7 @@ export const Sidebar = ({
               onClick={() => setShowSidebar(false)}
             />
           </Box>
-          <Box fill background="light-2" align="center" justify="center">
-            sidebar
-          </Box>
+          <Box fill background="light-2" align="center" justify="center"></Box>
         </Layer>
       )}
     </>
